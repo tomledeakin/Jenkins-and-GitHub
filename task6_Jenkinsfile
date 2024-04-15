@@ -1,0 +1,87 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the code using Maven'
+            }
+        }
+        
+        stage('Unit and Integration Tests') {
+            steps {
+                echo 'Running unit tests using JUnit'
+                echo 'Running integration tests using Selenium'
+            }
+            post {
+                success {
+                    emailext to: "tomledeakin@gmail.com",
+                             subject: "Unit and Integration Tests Passed",
+                             body: "Unit and integration tests passed successfully. Logs are attached.",
+                             attachmentsPattern: '**/*.log'
+                }
+                failure {
+                    emailext to: "tomledeakin@gmail.com",
+                             subject: "Unit and Integration Tests Failed",
+                             body: "Unit and integration tests failed. Please check the Jenkins console output for more details."
+                }
+            }
+        }
+        
+        stage('Code Analysis') {
+            steps {
+                echo 'Analyzing the code using SonarQube'
+            }
+        }
+        
+        stage('Security Scan') {
+            steps {
+                echo 'Performing security scan using OWASP ZAP'
+            }
+            post {
+                success {
+                    emailext to: "tomledeakin@gmail.com",
+                             subject: "Security Scan Passed",
+                             body: "Security scan passed successfully. Logs are attached.",
+                             attachmentsPattern: '**/*.log'
+                }
+                failure {
+                    emailext to: "tomledeakin@gmail.com",
+                             subject: "Security Scan Failed",
+                             body: "Security scan failed. Please check the Jenkins console output for more details."
+                }
+            }
+        }
+        
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Deploying the application to staging server using Jenkins Deploy Plugin'
+            }
+        }
+        
+        stage('Integration Tests on Staging') {
+            steps {
+                echo 'Running integration tests on staging environment using Selenium Grid'
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploying the application to production server using Jenkins Deploy Plugin'
+            }
+        }
+    }
+    
+    post {
+        success {
+            mail to: "tomledeakin@gmail.com",
+            subject: "Build Status Email",
+            body: "Build log attached!"
+        }
+        failure {
+            mail to: "tomledeakin@gmail.com",
+            subject: "Build Failed",
+            body: "The build has failed. Please check the Jenkins console output for more details."
+        }
+    }
+}
