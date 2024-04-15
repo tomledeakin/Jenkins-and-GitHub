@@ -18,7 +18,7 @@ pipeline {
                     emailext to: "tomledeakin@gmail.com",
                              subject: "Unit and Integration Tests Passed",
                              body: "Unit and integration tests passed successfully. Logs are attached.",
-                             attachmentsPattern: '**/*.log'
+                             //attachmentsPattern: '**/*.log'
                 }
                 failure {
                     emailext to: "tomledeakin@gmail.com",
@@ -43,7 +43,7 @@ pipeline {
                     emailext to: "tomledeakin@gmail.com",
                              subject: "Security Scan Passed",
                              body: "Security scan passed successfully. Logs are attached.",
-                             attachmentsPattern: '**/*.log'
+                             //attachmentsPattern: '**/*.log'
                 }
                 failure {
                     emailext to: "tomledeakin@gmail.com",
