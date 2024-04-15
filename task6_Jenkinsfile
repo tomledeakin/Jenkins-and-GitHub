@@ -14,15 +14,10 @@ pipeline {
                 echo 'Running integration tests using Selenium'
             }
             post {
-                success {
+                always {
                     emailext subject: "Unit and Integration Tests Passed",
                              body: "Unit and integration tests passed successfully. Logs are attached.",
                              attachmentsPattern: '**/*.log',
-                             to: "tomledeakin@gmail.com"
-                }
-                failure {
-                    emailext subject: "Unit and Integration Tests Failed",
-                             body: "Unit and integration tests failed. Please check the Jenkins console output for more details.",
                              to: "tomledeakin@gmail.com"
                 }
             }
@@ -39,15 +34,10 @@ pipeline {
                 echo 'Performing security scan using OWASP ZAP'
             }
             post {
-                success {
+                always {
                     emailext subject: "Security Scan Passed",
                              body: "Security scan passed successfully. Logs are attached.",
                              attachmentsPattern: '**/*.log',
-                             to: "tomledeakin@gmail.com"
-                }
-                failure {
-                    emailext subject: "Security Scan Failed",
-                             body: "Security scan failed. Please check the Jenkins console output for more details.",
                              to: "tomledeakin@gmail.com"
                 }
             }
