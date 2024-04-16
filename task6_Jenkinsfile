@@ -13,7 +13,8 @@ pipeline {
                 echo 'Running unit tests using JUnit'
                 echo 'Running integration tests using Selenium'
             }
-            post {
+        }
+        post {
                 success {
                     emailext subject: "Unit and Integration Tests Passed",
                              body: "Unit and integration tests passed successfully. Logs are attached.",
@@ -25,7 +26,6 @@ pipeline {
                              to: "tomledeakin@gmail.com"
                 }
             }
-        }
         
         stage('Code Analysis') {
             steps {
@@ -37,7 +37,9 @@ pipeline {
             steps {
                 echo 'Performing security scan using OWASP ZAP'
             }
-            post {
+        }
+
+        post {
                 success {
                     emailext subject: "Security Scan Passed",
                              body: "Security scan passed successfully. Logs are attached.",
@@ -49,7 +51,6 @@ pipeline {
                              to: "tomledeakin@gmail.com"
                 }
             }
-        }
         
         stage('Deploy to Staging') {
             steps {
