@@ -15,16 +15,22 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "tomledeakin@gmail.com",
-                    subject: "Unit and Integration Tests Passed",
-                    body: "Unit and integration tests passed successfully. Logs are attached.",
-                    attachmentsPattern: '**/*'
+                    script {
+                        archiveArtifacts artifacts: '**/*', excludes: ''
+                        mail to: "tomledeakin@gmail.com",
+                             subject: "Unit and Integration Tests Passed",
+                             body: "Unit and integration tests passed successfully.",
+                             attachmentsPattern: 'archive/**/*.log'
+                    }
                 }
                 failure {
-                    mail to: "tomledeakin@gmail.com",
-                    subject: "Unit and Integration Tests Failed",
-                    body: "Unit and integration tests failed. Please check the Jenkins console output for more details.",
-                    attachmentsPattern: '**/*'
+                    script {
+                        archiveArtifacts artifacts: '**/*', excludes: ''
+                        mail to: "tomledeakin@gmail.com",
+                             subject: "Unit and Integration Tests Failed",
+                             body: "Unit and integration tests failed. Please check the Jenkins console output for more details.",
+                             attachmentsPattern: 'archive/**/*.log'
+                    }
                 }
             }
         }
@@ -41,16 +47,22 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "tomledeakin@gmail.com",
-                    subject: "Security Scan Passed",
-                    body: "Security scan passed successfully. Logs are attached.",
-                    attachmentsPattern: '**/*'
+                    script {
+                        archiveArtifacts artifacts: '**/*', excludes: ''
+                        mail to: "tomledeakin@gmail.com",
+                             subject: "Security Scan Passed",
+                             body: "Security scan passed successfully.",
+                             attachmentsPattern: 'archive/**/*.log'
+                    }
                 }
                 failure {
-                    mail to: "tomledeakin@gmail.com",
-                    subject: "Security Scan Failed",
-                    body: "Security scan failed. Please check the Jenkins console output for more details.",
-                    attachmentsPattern: '**/*'
+                    script {
+                        archiveArtifacts artifacts: '**/*', excludes: ''
+                        mail to: "tomledeakin@gmail.com",
+                             subject: "Security Scan Failed",
+                             body: "Security scan failed. Please check the Jenkins console output for more details.",
+                             attachmentsPattern: 'archive/**/*.log'
+                    }
                 }
             }
         }
@@ -76,16 +88,22 @@ pipeline {
     
     post {
         success {
-            mail to: "tomledeakin@gmail.com",
-            subject: "Build Status Email",
-            body: "Build log attached!",
-            attachLog: true
+            script {
+                archiveArtifacts artifacts: '**/*', excludes: ''
+                mail to: "tomledeakin@gmail.com",
+                     subject: "Build Status Email",
+                     body: "Build succeeded.",
+                     attachmentsPattern: 'archive/**/*.log'
+            }
         }
         failure {
-            mail to: "tomledeakin@gmail.com",
-            subject: "Build Failed",
-            body: "The build has failed. Please check the Jenkins console output for more details.",
-            attachLog: true
+            script {
+                archiveArtifacts artifacts: '**/*', excludes: ''
+                mail to: "tomledeakin@gmail.com",
+                     subject: "Build Failed",
+                     body: "The build has failed. Please check the Jenkins console output for more details.",
+                     attachmentsPattern: 'archive/**/*.log'
+            }
         }
     }
 }
