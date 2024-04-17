@@ -17,14 +17,12 @@ pipeline {
                 success {
                     mail to: "tomledeakin@gmail.com",
                     subject: "Unit and Integration Tests Passed",
-                    body: "Unit and integration tests passed successfully. Logs are attached.",
-                    attachLog: true
+                    body: "Unit and integration tests passed successfully. Logs are attached."
                 }
                 failure {
                     mail to: "tomledeakin@gmail.com",
                     subject: "Unit and Integration Tests Failed",
-                    body: "Unit and integration tests failed. Please check the Jenkins console output for more details.",
-                    attachLog: true
+                    body: "Unit and integration tests failed. Please check the Jenkins console output for more details."
                 }
             }
         }
@@ -43,14 +41,12 @@ pipeline {
                 success {
                     mail to: "tomledeakin@gmail.com",
                     subject: "Security Scan Passed",
-                    body: "Security scan passed successfully. Logs are attached.",
-                    attachLog: true
+                    body: "Security scan passed successfully. Logs are attached."
                 }
                 failure {
                     mail to: "tomledeakin@gmail.com",
                     subject: "Security Scan Failed",
-                    body: "Security scan failed. Please check the Jenkins console output for more details.",
-                    attachLog: true
+                    body: "Security scan failed. Please check the Jenkins console output for more details."
                 }
             }
         }
